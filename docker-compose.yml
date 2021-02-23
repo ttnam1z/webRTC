@@ -1,0 +1,25 @@
+version: "3.1"
+services:
+  dev:
+   container_name: ubuntu_dev
+   build: 
+    context: .
+    dockerfile: Dockerfile
+   volumes:
+    - ubuntu_disk:/code
+   ports:
+    - "8000:8000"
+   #depends_on:
+   # - db
+   networks:
+    - work_common
+networks:
+  work_common:
+    external: true
+volumes:
+  ubuntu_disk:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /work/
